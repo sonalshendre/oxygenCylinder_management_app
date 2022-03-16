@@ -1,11 +1,12 @@
 import 'dart:async';
 
-
 import 'package:flutter/material.dart';
 import 'package:oxygen_management_app/customerlist.dart';
 import 'package:oxygen_management_app/firebaseDataDemo.dart';
 import 'package:oxygen_management_app/searchCustomer.dart';
 import 'package:oxygen_management_app/userEntryPage.dart';
+
+import 'common/StreamDemo.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -13,7 +14,9 @@ class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
-String cylinder='';
+
+String cylinder = '';
+
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   TabController? tabController;
   TextEditingController tc = TextEditingController();
@@ -27,8 +30,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       Timer(Duration(seconds: 3), () {
         setState(() {
           print('**********');
-          cylinder =
-          MyDataBase.dataCylinder.isNotEmpty ? MyDataBase.dataCylinder[0] : '0';
+          cylinder = MyDataBase.dataCylinder.isNotEmpty
+              ? MyDataBase.dataCylinder[0]
+              : '0';
         });
       });
     });
@@ -38,12 +42,30 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+
+            backgroundColor: Colors.green,
+            centerTitle: true,
+            title: Row(
+
+              children: [
+                CircleAvatar(
+                  radius: 45,
+                  child: Image.network(
+                  'https://cdn-icons-png.flaticon.com/128/3062/3062899.png',width: 50,height: 40,),
+                ),
+                Text(
+                  ' Jivan',
+                  style: TextStyle(fontSize: 35),
+                ),
+              ],
+            ),
+            elevation: 10),
         bottomNavigationBar: Container(
           height: 50,
-          color: Colors.redAccent,
+          color: Colors.green,
           child: TabBar(
             controller: tabController,
             tabs: [
@@ -67,7 +89,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               ),
               Column(
                 children: [
-                  Icon(Icons.upload_file, color: Colors.white),
+                  Icon(Icons.ac_unit_sharp, color: Colors.white),
                   Text(
                     'Update',
                     style: TextStyle(fontSize: 10, color: Colors.white),
@@ -89,13 +111,44 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         body: TabBarView(
           controller: tabController,
           children: [
-            Container(
-              height: 200,
-              child: Center(
-                  child: Text(
-                'No of Cylinder available : ${cylinder}',
-                style: TextStyle(fontSize: 25),
-              )),
+            Center(
+              child: Column(
+                children: [
+                  SizedBox(height: 20,),
+                  Image.network('https://cdn-icons-png.flaticon.com/128/3782/3782074.png'),
+                  SizedBox(height: 20,),
+                  Container(
+                    height: 150,
+                    width: 300,
+                    decoration: BoxDecoration(
+                      color: Color(0xffc8e6c9),
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.blue, width: 3),
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                          '  Total Avaliable Cylinder  ',
+                          style: TextStyle(
+                            fontSize: 23,
+                            color: Colors.white,
+                            backgroundColor: Colors.blue
+                          ),
+                        ),
+                        SizedBox(height: 20,),
+                        StreamBuilder<String>(
+                          initialData: '0',
+                          stream: StreamBuilderDemo.textUpdateStream,
+                          builder: (context, snapshot) => Text(
+                            '${snapshot.data}',
+                            style: TextStyle(fontSize: 40,color: Colors.deepPurple),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
             UserEntryDemo(),
             SearchCustomerDemo(),

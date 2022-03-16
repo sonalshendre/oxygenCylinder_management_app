@@ -1,4 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
+import 'package:oxygen_management_app/homepage.dart';
+
+import 'common/StreamDemo.dart';
 
 class MyDataBase {
   static List<String> dataCylinder = [];
@@ -28,12 +31,25 @@ class MyDataBase {
     Map temp = {};
     dbadmin.once().then((value) {
       temp = value.snapshot.value as Map;
-      print('----$temp');
+      dataCylinder.clear();
       temp.forEach((key, value) {
         dataCylinder.add(value['totalCylinder']);
       });
+
+      StreamBuilderDemo.setUdateText(dataCylinder[0].toString());
     });
   }
+
+  static Future updateData( String noOfCylinder,String key) async{
+
+    db.child(key).update({
+      'NoOfIssueCylinder':noOfCylinder,
+      'key': key,
+    }).then((value) {
+      selectData();
+    });
+  }
+
 
   static Future insertData(
       {String email = '',
@@ -52,6 +68,11 @@ class MyDataBase {
     });
   }
 
+  static deleteData(String key) {
+
+    db.child(key).remove();
+  }
+
   static Future selectData() async {
     Map temp = {};
     db.once().then((value) {
@@ -62,7 +83,6 @@ class MyDataBase {
         data.add(value);
         finalData.add(value);
       });
-      print(' FINAL DATA :: ${finalData}');
     });
   }
 }
