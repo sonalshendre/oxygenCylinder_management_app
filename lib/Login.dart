@@ -24,7 +24,7 @@ class _LoginAdminPageState extends State<LoginAdminPage> {
             children: [
               TextFormField(
                 // controller:widget.adminEmailController,
-                decoration: CommonTextFieldStyle.inputField(lable: 'Email'),
+                decoration: CommonTextFieldStyle.inputField(lable: 'Email Id'),
               ),
               TextFormField(
                 //controller:widget.adminPasswordController,
