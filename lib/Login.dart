@@ -30,7 +30,7 @@ class _LoginAdminPageState extends State<LoginAdminPage> {
                 //controller:widget.adminPasswordController,
                 decoration: CommonTextFieldStyle.inputField(lable: 'Company Name'),
               ),
-              MaterialButton(color: Colors.blue ,child: Text('Login', style: TextStyle(color: Colors.white),), onPressed: () {}),
+              MaterialButton(color: Colors.blue ,child: Text('LOGIN', style: TextStyle(color: Colors.white),), onPressed: () {}),
             ],
           ),
         ),
