@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:oxygen_management_app/customerlist.dart';
 import 'package:oxygen_management_app/firebaseDataDemo.dart';
 import 'package:oxygen_management_app/searchCustomer.dart';
+import 'package:oxygen_management_app/shared_perference_demo.dart';
 import 'package:oxygen_management_app/userEntryPage.dart';
 
+import 'Login.dart';
 import 'common/StreamDemo.dart';
 
 class HomePage extends StatefulWidget {
@@ -45,16 +47,29 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-
             backgroundColor: Colors.green,
             centerTitle: true,
+            actions: [
+              GestureDetector(
+                  child: Text(
+                    'logout',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  onTap: (){
+                    SharedPeferrenceDemo.dispose(key: 'login');
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => LoginAdminPage()));
+                  }),
+            ],
             title: Row(
-
               children: [
                 CircleAvatar(
                   radius: 45,
                   child: Image.network(
-                  'https://cdn-icons-png.flaticon.com/128/3062/3062899.png',width: 50,height: 40,),
+                    'https://cdn-icons-png.flaticon.com/128/3062/3062899.png',
+                    width: 50,
+                    height: 40,
+                  ),
                 ),
                 Text(
                   ' Jivan',
@@ -114,9 +129,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             Center(
               child: Column(
                 children: [
-                  SizedBox(height: 20,),
-                  Image.network('https://cdn-icons-png.flaticon.com/128/3782/3782074.png'),
-                  SizedBox(height: 20,),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Image.network(
+                      'https://cdn-icons-png.flaticon.com/128/3782/3782074.png'),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Container(
                     height: 150,
                     width: 300,
@@ -130,18 +150,20 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         Text(
                           '  Total Avaliable Cylinder  ',
                           style: TextStyle(
-                            fontSize: 23,
-                            color: Colors.white,
-                            backgroundColor: Colors.blue
-                          ),
+                              fontSize: 23,
+                              color: Colors.white,
+                              backgroundColor: Colors.blue),
                         ),
-                        SizedBox(height: 20,),
+                        SizedBox(
+                          height: 20,
+                        ),
                         StreamBuilder<String>(
                           initialData: '0',
                           stream: StreamBuilderDemo.textUpdateStream,
                           builder: (context, snapshot) => Text(
                             '${snapshot.data}',
-                            style: TextStyle(fontSize: 40,color: Colors.deepPurple),
+                            style: TextStyle(
+                                fontSize: 40, color: Colors.deepPurple),
                           ),
                         ),
                       ],

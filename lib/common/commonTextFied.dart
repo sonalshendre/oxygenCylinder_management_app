@@ -15,7 +15,8 @@ class CommonTextFieldStyle{
       hintText: hintext,
       label: Text(
         lable,
-        style: TextStyle(color: Colors.blue),
+        style: TextStyle(color: Colors.blue,fontSize: 20),
+
       ),
       errorText: errorT,
       focusedBorder: const OutlineInputBorder(

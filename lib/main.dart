@@ -5,19 +5,22 @@ import 'package:oxygen_management_app/homepage.dart';
 import 'package:oxygen_management_app/searchCustomer.dart';
 import 'package:oxygen_management_app/shared_perference_demo.dart';
 import 'package:oxygen_management_app/userEntryPage.dart';
-import 'login_page.dart';
+import 'Login.dart';
+import 'Register_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  bool? success;
   await Firebase.initializeApp();
   await SharedPeferrenceDemo.initPref();
-  runApp( MaterialApp(
-    home: AdminRegisterPage(),
-    //home: HomePage(),
+  success = SharedPeferrenceDemo.getBoolData(key: 'login');
+  success = success ?? false;
+  print('------ $success');
+  runApp(MaterialApp(
+    home: success == true ? HomePage() : LoginAdminPage(),
+    //home: ,
   ));
 }
-
-
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -25,9 +28,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-    );
+    return MaterialApp();
   }
 }
-
-
