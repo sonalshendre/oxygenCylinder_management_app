@@ -6,12 +6,13 @@ import 'common/StreamDemo.dart';
 class MyDataBase {
   static List<String> dataCylinder = [];
   static List<Map> data = [];
+  static int availableCylinder=0;
   static List<Map> finalData = [];
   static DatabaseReference db = FirebaseDatabase.instance.ref('customerInfo');
   static DatabaseReference dbadmin = FirebaseDatabase.instance.ref('admin');
 
   static Future insertDateCylinder(String noOfCylinder) async {
-    //String keyc = db.push().key!;
+    String keyc = db.push().key!;
     dbadmin.child('totalCylinder').set({
       'totalCylinder': noOfCylinder,
     }).then((value) {
@@ -35,7 +36,7 @@ class MyDataBase {
       temp.forEach((key, value) {
         dataCylinder.add(value['totalCylinder']);
       });
-
+       availableCylinder = int.parse(dataCylinder[0].toString());
       StreamBuilderDemo.setUdateText(dataCylinder[0].toString());
     });
   }
@@ -68,9 +69,11 @@ class MyDataBase {
     });
   }
 
-  static deleteData(String key) {
+  static Future deleteData(String key) async{
 
-    db.child(key).remove();
+    db.child(key).remove().then((value){
+      selectData();
+    });
   }
 
   static Future selectData() async {

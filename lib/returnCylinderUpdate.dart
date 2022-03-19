@@ -70,11 +70,11 @@ class _ReturnCylinderUpdatedemoState extends State<ReturnCylinderUpdatedemo> {
                   children: [
                     Text(
                       'Customer name:   ',
-                      style: TextStyle(fontSize: 20, color: Colors.deepPurple),
+                      style: TextStyle(fontSize: 15, color: Colors.deepPurple),
                     ),
                     Text(
                       widget.customerName,
-                      style: TextStyle(fontSize: 25, color: Colors.blue),
+                      style: TextStyle(fontSize: 20, color: Colors.blue),
                     ),
                   ],
                 ),
@@ -113,54 +113,59 @@ class _ReturnCylinderUpdatedemoState extends State<ReturnCylinderUpdatedemo> {
                 SizedBox(height: 20,),
                 MaterialButton(
                   onPressed: () {
-                    if (widget.returnCylinderController.text ==
-                        widget.numOfCylinder) {
-                      MyDataBase.deleteData(widget.keyCu);
-                      MyDataBase.updateDateCylinder((int.parse(
-                                      MyDataBase.dataCylinder[0].toString()) +
-                                  int.parse(widget.returnCylinderController.text
+
+                      if (widget.returnCylinderController.text ==
+                          widget.numOfCylinder) {
+                        MyDataBase.deleteData(widget.keyCu);
+                        MyDataBase.updateDateCylinder((int.parse(
+                            MyDataBase.dataCylinder[0].toString()) +
+                            int.parse(widget.returnCylinderController.text
+                                .toString()))
+                            .toString())
+                            .then((value) {
+                          cylinder =
+                              (int.parse(
+                                  MyDataBase.dataCylinder[0].toString()) +
+                                  int.parse(widget
+                                      .returnCylinderController.text
                                       .toString()))
-                              .toString())
-                          .then((value) {
-                        cylinder =
-                            (int.parse(MyDataBase.dataCylinder[0].toString()) +
-                                    int.parse(widget
-                                        .returnCylinderController.text
-                                        .toString()))
-                                .toString();
+                                  .toString();
 
-                        // StreamBuilderDemo.setUdateText(cylinder);
+                          // StreamBuilderDemo.setUdateText(cylinder);
 
-                        Navigator.pop(context);
-                      });
-                    } else {
-                      MyDataBase.updateDateCylinder((int.parse(
-                                      MyDataBase.dataCylinder[0].toString()) +
-                                  int.parse(widget.returnCylinderController.text
+                          Navigator.pop(context);
+                        });
+                      } else {
+                        MyDataBase.updateDateCylinder((int.parse(
+                            MyDataBase.dataCylinder[0].toString()) +
+                            int.parse(widget.returnCylinderController.text
+                                .toString()))
+                            .toString())
+                            .then((value) {
+                          cylinder =
+                              (int.parse(
+                                  MyDataBase.dataCylinder[0].toString()) +
+                                  int.parse(widget
+                                      .returnCylinderController.text
                                       .toString()))
-                              .toString())
-                          .then((value) {
-                        cylinder =
-                            (int.parse(MyDataBase.dataCylinder[0].toString()) +
-                                    int.parse(widget
-                                        .returnCylinderController.text
-                                        .toString()))
-                                .toString();
+                                  .toString();
 
-                        // StreamBuilderDemo.setUdateText(cylinder);
-                      });
+                          // StreamBuilderDemo.setUdateText(cylinder);
+                        });
 
-                      MyDataBase.updateData(
-                              (int.parse(widget.numOfCylinder) -
-                                      int.parse(
-                                          widget.returnCylinderController.text))
-                                  .toString(),
-                              widget.keyCu)
-                          .then((value) {
-                        Navigator.pop(context);
-                      });
-                    }
+                        MyDataBase.updateData(
+                            (int.parse(widget.numOfCylinder) -
+                                int.parse(
+                                    widget.returnCylinderController.text))
+                                .toString(),
+                            widget.keyCu)
+                            .then((value) {
+                          Navigator.pop(context);
+                        });
+                      }
+
                   },
+
                   color: Colors.blue,
                   child: Text(
                     'update',

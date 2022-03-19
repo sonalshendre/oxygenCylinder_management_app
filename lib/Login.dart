@@ -35,6 +35,8 @@ class _LoginAdminPageState extends State<LoginAdminPage> {
             children: [
               Image.network(
                   'https://cdn-icons-png.flaticon.com/128/3782/3782074.png'),
+                // Text(email),
+              //Text(password),
               TextFormField(
 
                  controller:widget.adminEmailController,

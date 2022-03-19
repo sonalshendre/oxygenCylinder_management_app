@@ -20,6 +20,14 @@ class _SearchCustomerDemoState extends State<SearchCustomerDemo> {
   String name = '';
   String email = '';
   String noOfIssueCylinder = '';
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setState(() {
+
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

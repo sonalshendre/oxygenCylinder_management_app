@@ -23,18 +23,21 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   TabController? tabController;
   TextEditingController tc = TextEditingController();
 
+
   @override
   void initState() {
     super.initState();
+
     tabController = TabController(length: 4, vsync: this);
     MyDataBase.selectData();
     MyDataBase.selectDataCylinder().then((value) {
       Timer(Duration(seconds: 3), () {
         setState(() {
-          print('**********');
+
           cylinder = MyDataBase.dataCylinder.isNotEmpty
               ? MyDataBase.dataCylinder[0]
               : '0';
+
         });
       });
     });
